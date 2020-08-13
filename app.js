@@ -1,11 +1,9 @@
-const date = new Date();
-
 const days = ['Sunday', 'Monday', 'Thuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-// Set the day
+// Get the day
 const getDay = function () {
-    let dayNum = date.getDay();
+    let dayNum = new Date().getDay();
     for (let dayIndex in days) {
         if (dayNum == dayIndex) {
 
@@ -14,9 +12,9 @@ const getDay = function () {
     }
 }
 
-// Set the month
+// Get the month
 const getMonth = function () {
-    let monthNum = date.getMonth();
+    let monthNum = new Date().getMonth();
     for (let monthIndex in months) {
         if (monthNum == monthIndex) {
 
@@ -25,52 +23,46 @@ const getMonth = function () {
     }
 }
 
-// Set the date
+// Get the date
 const getDate = function () {
-    let monthDate = date.getDate();
+    let monthDate = new Date().getDate();
     return monthDate
 }
 
-// append the date on page
-document.getElementById('date').innerHTML = `${getDay()}, ${getMonth()} ${getDate()}`;
-
-// Set the time
+// Get the time
 const getTime = function () {
-    let startDate = new Date();
-
-    let time = startDate.toLocaleTimeString();
-    document.getElementById('time').innerHTML = `${time}`
+    // let startDate = new Date();
+    let time = new Date().toLocaleTimeString();
+    //console.log(time);
+    return time
 }
 
-// Start the clock and rerun it every second
-let startClock = getTime();
-let runClock = setInterval(getTime, 1000);
-
-
-
-// Click event to change clock
-document.getElementById('btn').addEventListener('click', changeClock);
-
-function changeClock() {
-    let newDate = new Date();
-    let hour = newDate.getHours();
-
-    clearInterval(runClock);
-
-    newHour = hour - 12
-    let minute = newDate.getMinutes();
-    let second = newDate.getSeconds();
+const hourClock = function () {
+    let clockTime;
+    let hour = new Date().getHours()
 
     if (hour > 12) {
-        clock = 'PM'
+        clockTime = 'PM'
     } else {
-        clock = 'AM'
+        clockTime = 'AM'
     };
 
-    document.getElementById('time').innerHTML = `${newHour}:${minute}:${second} ${clock}`;
+    return clockTime;
+}
 
-    // Run the new clock every second
-    setInterval(changeClock, 1000);
-};
+
+// document.getElementById('btn').addEventListener('click', changeClock);
+
+
+setInterval(function () {
+
+    // append date on page
+    document.getElementById('date').innerHTML = `${getDay()}, ${getMonth()} ${getDate()}`;
+    // append time on page
+    document.getElementById('time').innerHTML = `${getTime()} ${hourClock()}`
+
+    // document.getElementById('clock-type').innerHTML = `${changeClock()}`
+
+}, 1000);
 
 
