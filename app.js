@@ -1,7 +1,7 @@
 const days = ['Sunday', 'Monday', 'Thuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-let isMilitaryTime = false;
+let isMilitaryTime = true;
 
 // Date functions
 const getDay = (currentDate) => days[currentDate.getDay()];
@@ -14,12 +14,22 @@ const getHourFor12hClock = (date) => {
     let hour = getHours(date);
     return hour >= 12 ? hour - 12 : hour
 }
-const getAmPm = () => new Date().getHours() >= 12 ? 'PM' : 'AM';
+const getAmPm = currentDate => currentDate.getHours() >= 12 ? 'PM' : 'AM';
 
 // 24h military clock functions
 const getHours = (currentDate) => currentDate.getHours();
 const getMinutes = (currentDate) => currentDate.getMinutes();
 const getSeconds = (currentDate) => currentDate.getSeconds();
+
+const getSecondsForMilitaryTime = (date) => {
+    let seconds = getSeconds(date);
+    return seconds <= 9 ? `0${seconds}` : seconds
+}
+
+const getMinutesForMilitaryTime = (date) => {
+    let minutes = getMinutes(date);
+    return minutes <= 9 ? `0${minutes}` : minutes
+}
 
 const displayClock = function () {
     const date = new Date();
@@ -28,9 +38,9 @@ const displayClock = function () {
     document.getElementById('date').innerHTML = `${getDay(date)}, ${getMonth(date)} ${getDate(date)}`;
     // append time on page
     if (isMilitaryTime === false) {
-        document.getElementById('time').innerHTML = `${getHourFor12hClock(date)}:${getMinutes(date)}:${getSeconds(date)} ${getAmPm()}`
+        document.getElementById('time').innerHTML = `${getHourFor12hClock(date)}:${getMinutes(date)}:${getSeconds(date)} ${getAmPm(date)}`
     } else {
-        document.getElementById('time').innerHTML = `${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`
+        document.getElementById('time').innerHTML = `${getHours(date)}:${getMinutesForMilitaryTime(date)}:${getSecondsForMilitaryTime(date)}`
     }
 }
 
