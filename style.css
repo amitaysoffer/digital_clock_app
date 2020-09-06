@@ -5,7 +5,6 @@ body {
     font-family: 'Signika', sans-serif;
     display: flex;
     height: 100%;
-    background: green;
 }
 
 #container {
@@ -17,3 +16,19 @@ body {
 #time {
     font-size: 50px;
 }
+
+#toggle-btn {
+    padding: 10px;
+    border-radius: 10px;
+    color: #000;
+    background: bottom;
+    border: 2px #000 solid;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+
+}
+#toggle-btn:hover {
+    background-color: grey;
+    transition-duration: 0.7s;
+  }
