@@ -13,9 +13,6 @@ const getHours = (currentDate) => currentDate.getHours();
 const getMinutes = (currentDate) => currentDate.getMinutes();
 const getSeconds = (currentDate) => currentDate.getSeconds();
 
-
-// const getTime = () => new Date().toLocaleTimeString();
-
 const getHourFor12hClock = (date) => {
     const hour = getHours(date);
     return hour > 12 ? hour - 12 : hour
