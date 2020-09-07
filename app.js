@@ -15,8 +15,14 @@ const getSeconds = (currentDate) => currentDate.getSeconds();
 
 const getHourFor12hClock = (date) => {
     const hour = getHours(date);
-    return hour > 12 ? hour - 12 : hour
-}
+    if (hour === 0) {
+        return 12
+    } else if (hour > 12) {
+        return hour - 12
+    } else {
+        return hour
+    }
+};
 const addAmPm = currentDate => currentDate.getHours() >= 12 ? 'PM' : 'AM';
 
 const addZeroToSeconds = (date) => {
@@ -27,17 +33,20 @@ const addZeroToMinutes = (date) => {
     const minutes = getMinutes(date);
     return minutes <= 9 ? `0${minutes}` : minutes
 }
+const addZeroToHours = (date) => {
+    const hours = getHours(date);
+    return hours <= 9 ? `0${hours}` : hours
+}
 
 const displayClock = function () {
     const date = new Date();
-
     // append date on page
     document.getElementById('date').innerHTML = `${getDay(date)}, ${getMonth(date)} ${getDate(date)}`;
     // append time on page
     if (isMilitaryTime === false) {
         document.getElementById('time').innerHTML = `${getHourFor12hClock(date)}:${addZeroToMinutes(date)}:${addZeroToSeconds(date)} ${addAmPm(date)}`
     } else {
-        document.getElementById('time').innerHTML = `${getHours(date)}:${addZeroToMinutes(date)}:${addZeroToSeconds(date)}`
+        document.getElementById('time').innerHTML = `${addZeroToHours(date)}:${addZeroToMinutes(date)}:${addZeroToSeconds(date)}`
     }
 }
 
@@ -50,6 +59,7 @@ document.getElementById('toggle-btn').addEventListener('click', function () {
 
     displayClock();
 });
+
 
 displayClock();
 
