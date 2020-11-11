@@ -23,6 +23,13 @@ const getHourFor12hClock = (date) => {
         return hour
     }
 };
+
+const getHourFor12hClock = date => {
+    const hour = getHours(date);
+    if (hour === 0) return 12;
+    return hour > 12 ? hour - 12 : hour;
+}
+
 const addAmPm = currentDate => currentDate.getHours() >= 12 ? 'PM' : 'AM';
 
 const addZeroToSeconds = (date) => {
